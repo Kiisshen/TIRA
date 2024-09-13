@@ -13,7 +13,6 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T extends Comparable<T>> void insertionSort(T[] array) {
-      // TODO: Implement this.
       insertionSort(array, 0, array.length);
    }
 
@@ -22,14 +21,17 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
-      // TODO: Implement this.
       for( int i = fromIndex; i < toIndex; i++){
+         //Save the current value to be moved to sorted position.
          T c = array[i];
+         //Take starting point of sort to compare current value to the values to left of it.
          int j = i;
+         //Move elements to right untill we find element that is smaller than current value.
          while( j > fromIndex  && c.compareTo( array[j-1]) < 0){
-            array[j] = array[j -1];
+            array[j] = array[j-1];
             j--;
          }
+         //Set the current value to its right sorted spot.
          array[j] = c;
       }
    }
