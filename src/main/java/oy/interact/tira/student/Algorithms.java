@@ -57,7 +57,7 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T> void reverse(T[] array) {
-      // TODO: Implement this.
+      reverse(array, 0, array.length);
    }
 
    ///////////////////////////////////////////
@@ -65,7 +65,20 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T> void reverse(T[] array, int fromIndex, int toIndex) {
-      // TODO: Implement this.
+      // Take end and start points.
+      int startIndx = fromIndex;
+      int lastIndx = toIndex-1;
+      // Swap first and last untill startpoint passes or reaches endpoint.
+      while( startIndx <= lastIndx){
+         // Save first.
+         T dummy = array[startIndx];
+         // Swap.
+         array[startIndx] = array[lastIndx];
+         array[lastIndx] = dummy;
+         // Move increment first and decrement last.
+         startIndx++;
+         lastIndx--;
+      }
    }
 
 
