@@ -59,6 +59,17 @@ public enum CoderSortOrder {
 	// that compares elements in reversed order.
 
 	public Comparator<Coder> getComparator() {
-		return null;
+		switch (this) {
+			case FULLNAME_ASCENDING:
+				return Comparator.comparing(Coder::getFullName);
+			case FULLNAME_DESCENDING:
+				return Comparator.comparing(Coder::getFullName).reversed();
+			case CODER_NAME_ASCENDING:
+				return Comparator.comparing(Coder::getCoderName);
+			case CODER_NAME_DESCENDING:
+				return Comparator.comparing(Coder::getCoderName).reversed();
+			default:
+				return null;
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class Algorithms {
          //Take starting point of sort to compare current value to the values to left of it.
          int j = i;
          //Move elements to right untill we find element that is smaller than current value.
-         while( j > fromIndex  && c.compareTo( array[j-1]) < 0){
+         while( j > fromIndex && c != null && c.compareTo( array[j-1]) < 0 ){
             array[j] = array[j-1];
             j--;
          }
@@ -52,7 +52,7 @@ public class Algorithms {
       for (int i = fromIndex; i < toIndex; i++) {
         T c = array[i];
         int j = i;
-        while (j > fromIndex && comparator.compare(c, array[j - 1]) < 0) {
+        while (j > fromIndex && c != null && comparator.compare(c, array[j - 1]) < 0) {
             array[j] = array[j - 1];
             j--;
         }

@@ -196,10 +196,7 @@ public class Coder implements Comparable<Coder> {
 	 */
 	@Override
 	public int compareTo(Coder another) {
-		if(lastName.compareTo(another.lastName) == 0){
-			return firstName.compareTo(another.firstName);
-		}
-		return lastName.compareTo(another.lastName);
+		return getFullName().compareTo(another.getFullName());
 	}
 
 	/**
