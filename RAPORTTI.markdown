@@ -127,6 +127,62 @@ n       F (ms)  S (us)  Total (ms)
 
 ## 03-TASK
 
+Översti:
+
+PhoneBookArray: Search took 43 ms
+PhoneBookArray: Fast search took 0 ms
+
+Muutamia muita hakuja eripuolilta listaa:
+
+PhoneBookArray: Search took 19 ms
+PhoneBookArray: Fast search took 0 ms
+
+PhoneBookArray: Search took 28 ms
+PhoneBookArray: Fast search took 0 ms
+
+PhoneBookArray: Search took 2 ms
+PhoneBookArray: Fast search took 0 ms
+
+PhoneBookArray: Search took 3 ms
+PhoneBookArray: Fast search took 0 ms
+
+Nopean haun keskimääräinen aika on 0ms, kun taas puolitushaun aika näyttää olevan hieman matalempi listan alkupäässä.
+
+Nopea haku lienee nopeampi koska sillä vertaillaan suoraan merkkijonoja, kun taas epätarkassa haussa vertaillaan kokonaisia olioita, eli voidaan hakea minkä vain nimen perusteella.
+
+Aineiston alusta ja lopusta hakeminen näyttää vaikuttavan tavalliseen puolitushakuun mutta nopeaan hakuun se ei ainakaan vielä 50000 koodarilla näytä vaikuttavan, vaan haku aika on aina ~0ms.
+
+Pienillä aineoistoilla hakuajat ovat molemmissa tapauksissa listan molemmissa päissä lähellä nollaa, eli niissä tapauksissa ei lienee väliä kumpaa käytetään, mitä nyt tarkkaan hakuun hakusanan kirjoittaminen on tarkempaa ja vie enemmän aikaa.
+
+```Data:
+n       Fill    Sort    binSearch       Total
+1000    3       5       331     339
+2000    7       10      21      38
+3000    15      25      36      76
+4000    28      40      24      92
+5000    41      68      30      139
+6000    60      104     57      221
+7000    84      141     29      254
+8000    110     177     73      360
+9000    143     231     104     478
+10000   177     287     31      495
+11000   210     332     27      569
+12000   248     388     28      664
+13000   292     495     55      842
+14000   344     567     51      962
+15000   428     632     25      1085
+16000   451     745     50      1246
+```
+
+Graafit:
+![alt text](image-1.png)
+
+Puolitushaun aikakompleksisuus luokka on O(log(2) N), mikä johtunee juurikin algoritmin luonteesta puolittaa aineistoa niin kauan että löytää etsityn alkion.
+
+Tämä on huomattavasti nopeampi lineaariseen hakuun verrattuna, jossa joudutaan pahimmillaan käymään läpi koko taulukko, ennenkuin löydetään haluttu alkio. (O(N))
+
+Tehtävää tehdessäni pääsin palauttamaan mieleen puolitushaun ja comparatorin toimintaa. Iteratiivisen haun toteutus oli helppoa, sillä sen pseudo koodi oli hyvin ymmärrettävää wikipediassa ja materiaali oli helposti ymmärrettävää. Vaikeaa oli saada vertailuoperaattorit ja indeksit oikein algoritmeihin, niin että ne toimivat halutulla tavalla, vaikka ei sekään silti paljoa päänvaivaa tuottanut.
+
 ## 04-TASK
 
 ## 05-TASK

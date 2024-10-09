@@ -70,9 +70,16 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 
 	@Override
 	public int indexOf(E element, Comparator<E> usingComparator) {
-		for(int i = 0; i < count; i++){
-			if(array[i].compareTo(element) == 0){
-				return i;
+		//If sorted, do binary search.
+		if(isSorted()){
+			return Algorithms.binarySearch(element, array, 0, count-1, usingComparator);
+		}
+		//If not, do linear search.
+		else {
+			for(int i = 0; i < count; i++){
+				if(array[i].compareTo(element) == 0){
+					return i;
+				}
 			}
 		}
 		return -1;
