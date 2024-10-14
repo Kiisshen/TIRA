@@ -1,5 +1,9 @@
 package oy.interact.tira.student;
 
+import oy.interact.tira.student.ParenthesesException;
+
+import java.util.HashMap;
+
 import oy.interact.tira.util.StackInterface;
 
 public class ParenthesisChecker {
@@ -48,6 +52,43 @@ public class ParenthesisChecker {
       //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
       // if the stack is not empty after all the characters have been handled
       //   throw an exception since the string has more opening than closing parentheses.
-      return -1;
+      int count = 0;
+      int line = 1;
+      int columnNumber = 0;
+      HashMap<Character, Character> parentheses = new HashMap <Character, Character>();
+      parentheses.put('(', ')');
+      parentheses.put('{', '}');
+      parentheses.put('[', ']');
+      try {
+         for (char oneChar : fromString.toCharArray()) {
+               if (parentheses.containsKey(oneChar)) {
+                  stack.push(oneChar);
+                  count++;
+               } 
+               else if (parentheses.containsValue(oneChar)) {
+                  count++;
+                  if (stack.isEmpty()) {
+                     throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.TOO_MANY_CLOSING_PARENTHESES) ;
+                  }
+                  char lastOpen = stack.pop();
+                  if (parentheses.get(lastOpen) != oneChar) {
+                     throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.PARENTHESES_IN_WRONG_ORDER) ;
+                  }
+               }
+               else if(oneChar == '\n'){
+                  line++;
+                  columnNumber = 1;
+               }
+               else{
+                  columnNumber++;
+               }
+         }
+         if (!stack.isEmpty()) {
+            throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.TOO_MANY_OPENING_PARENTHESES) ;
+         }
+      } catch (Exception e) {
+         throw new ParenthesesException("Stack Failure", line, columnNumber, ParenthesesException.STACK_FAILURE) ;
+      }
+      return count;
    }
 }
