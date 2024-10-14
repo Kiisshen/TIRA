@@ -54,41 +54,48 @@ public class ParenthesisChecker {
       //   throw an exception since the string has more opening than closing parentheses.
       int count = 0;
       int line = 1;
-      int columnNumber = 0;
-      HashMap<Character, Character> parentheses = new HashMap <Character, Character>();
+      int columnNumber = 1;
+      HashMap<Character, Character> parentheses = new HashMap<>();
       parentheses.put('(', ')');
       parentheses.put('{', '}');
       parentheses.put('[', ']');
+  
       try {
-         for (char oneChar : fromString.toCharArray()) {
-               if (parentheses.containsKey(oneChar)) {
-                  stack.push(oneChar);
-                  count++;
-               } 
-               else if (parentheses.containsValue(oneChar)) {
-                  count++;
+          for (char oneChar : fromString.toCharArray()) {
+              if (parentheses.containsKey(oneChar)) {
+                  try {
+                      stack.push(oneChar);
+                      count++;
+                  } catch (Exception e) {
+                      throw new ParenthesesException("Stack failure", line, columnNumber, ParenthesesException.STACK_FAILURE);
+                  }
+              } else if (parentheses.containsValue(oneChar)) {
                   if (stack.isEmpty()) {
-                     throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.TOO_MANY_CLOSING_PARENTHESES) ;
+                      throw new ParenthesesException("Too many closing parentheses", line, columnNumber, ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
                   }
                   char lastOpen = stack.pop();
                   if (parentheses.get(lastOpen) != oneChar) {
-                     throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.PARENTHESES_IN_WRONG_ORDER) ;
+                      throw new ParenthesesException("Mismatched parentheses", line, columnNumber, ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
                   }
-               }
-               else if(oneChar == '\n'){
+                  count++;
+              }
+              if (oneChar == '\n') {
                   line++;
                   columnNumber = 1;
-               }
-               else{
-                  columnNumber++;
-               }
-         }
-         if (!stack.isEmpty()) {
-            throw new ParenthesesException("Invalid parenthesis in file", line, columnNumber, ParenthesesException.TOO_MANY_OPENING_PARENTHESES) ;
-         }
+              }
+              else{
+                columnNumber++;
+              }
+          }
+          if (!stack.isEmpty()) {
+              throw new ParenthesesException("Too many opening parentheses", line, columnNumber, ParenthesesException.TOO_MANY_OPENING_PARENTHESES);
+          }
+      } catch (ParenthesesException e) {
+          throw e;
       } catch (Exception e) {
-         throw new ParenthesesException("Stack Failure", line, columnNumber, ParenthesesException.STACK_FAILURE) ;
+          throw new ParenthesesException("Stack failure", line, columnNumber, ParenthesesException.STACK_FAILURE);
       }
+  
       return count;
    }
 }
