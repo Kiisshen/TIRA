@@ -218,6 +218,36 @@ Analysoidaan pinototeutustani aikakompleksisuusvaatimusten pohjalta:
 
 ## 05-TASK
 
+Linkitetyt listat olivat jo tuttuja C++ Intermediate Programming kurssilta, mutta kertaus on opintojen äiti. Linkitetyn listan tekeminen tuntui jopa helpommalta, ainakaan reallokointia ei tarvitse pahemmin miettiä.
+
+Jonkun verran tämä taas aiheutti päänvaivaa, lähinnä indeksit ja jakojäännökset, mutta vaikka tehtävä on vähän aikaa vievä niin se ei ollut ylitsepääsemättömän vaikea.
+
+Tehtävästä teki hauskan se että lopuksi nähtiin miten rakennetta käytetään oikeasti, ja sen integrointi TIRA Codersiin ei vaatinut itseltä mitään ylimääräistä tiedostojen välillä loikkimista.
+
+Linkitetty lista lienee parempi jono tietorakenteelle, koska siinä ei käytetä listan keskellä olevia elementtejä. Kuitenkin jos puhuttaisiin normaaleista listoista, niin esim array[idx] aikakompleksisuus lienee paljon linkitettyä listaa pienempi, sillä linkitetty lista jouduttaisiin pahimmassa tapauksessa juoksemaan kokonaan läpi jolloin päädyttäisiin O(N).
+
+Linkitetty lista on myös parempi jos listan keskelle tarvitsee lisätä tietoa, olettaen tietty että tiedetään alkio jonka perään tieto lisätään. Linkitetyssä listassa voidaan vain manipuloida pointtereita, kun taas taulukossa joudutaan siirtämään muita elementtejä oikealle, mikä hidastaa operaatiota.
+
+Analysoidaan jonototeutuksia aikakompleksisuuden näkökulmasta:
+
+- `capacity()`: O(1).
+  Palauttaa vain capacity = toteutuu.
+- `enqueue()`: O(1) paitsi kun/jos joudutaan reallokoimaan taulukkoratkaisussa: O(n).
+  Pelkkää osoitin manipulaatiota = Toteutuu.
+  Kun reallokoidaan, O(n). Linkitetyssä listassa O(1).
+- `dequeue()`: O(1).
+  Jälleen pelkkää osoitin manipulaatiota = Toteutuu.
+- `element()`: O(1).
+  Palauttaa vain array[head] = Toteutuu.
+- `size():` O(1).
+  Palauttaa vain size = Toteutuu.
+- `isEmpty():` O(1).
+  Palauttaa vain boolean(size == 0) = Toteutuu.
+- `clear()`: O(1).
+  Tyhjentää taulukon vaihtamalla sen uuteen tyhjään taulukkoon = Toteutuu.
+- `toString()`: O(n).
+  Käy n pituisen taulukon (array) läpi, ja tulostaa sen alkiot = Toteutuu.
+
 ## 06-TASK
 
 ## 07-TASK
