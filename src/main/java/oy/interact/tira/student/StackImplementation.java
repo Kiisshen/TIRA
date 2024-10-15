@@ -54,9 +54,7 @@ public class StackImplementation<E> implements StackInterface<E> {
     }
     @Override
     public void clear(){
-        for(int i = 0; i < tail; i++){
-            array[i] = null;
-        }
+        array = new Object[DEFAULT_STACK_SIZE];
         tail = 0;
     }
     @Override

@@ -23,7 +23,7 @@ import oy.interact.tira.util.StackInterface;
  * 
  */
 @DisplayName("Testing the stack with two structured files with parentheses.")
-public class ParenthesisTests {
+class ParenthesisTests {
 
    static int result = 0;
 
@@ -110,7 +110,7 @@ public class ParenthesisTests {
          assertNotNull(stackToTest, "StackFactory failed to create the stack object");
          assertDoesNotThrow(() -> result = ParenthesisChecker.checkParentheses(stackToTest, toCheck),
                "SSN.java is valid so must not throw");
-         assertEquals(70, result, () -> "Parentheses count did not match with expected.");
+         assertEquals(76, result, () -> "Parentheses count did not match with expected.");
          assertTrue(stackToTest.isEmpty(), () -> "Stack must be empty when finished.");
       } catch (IOException e) {
          fail("Cannot read the test file " + e.getMessage());
@@ -123,7 +123,7 @@ public class ParenthesisTests {
     */
    @Test
    // @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
-   @DisplayName("JSON file with too many closing parentheses should fail the test.")
+   @DisplayName("JSON file Person.json with too many closing parentheses should fail the test.")
    void incorrectJSONParenthesisTest1() {
       try {
          String toCheck;
@@ -140,7 +140,7 @@ public class ParenthesisTests {
 
    @Test
    // @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
-   @DisplayName("JSON file with too many closing parentheses should fail the test.")
+   @DisplayName("JSON file Person.json must fail the test with correct error data.")
    void incorrectJSONParenthesisTestExceptionData() {
 
       try {
@@ -163,7 +163,7 @@ public class ParenthesisTests {
 
    @Test
    // @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
-   @DisplayName("JSON file with too many opening parentheses should fail the test.")
+   @DisplayName("JSON file Person2.json with too many opening parentheses should fail the test.")
    void incorrectJSONParenthesisTest2() {
       try {
          String toCheck;

@@ -52,50 +52,43 @@ public class ParenthesisChecker {
       //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
       // if the stack is not empty after all the characters have been handled
       //   throw an exception since the string has more opening than closing parentheses.
-      int count = 0;
-      int line = 1;
-      int columnNumber = 1;
-      HashMap<Character, Character> parentheses = new HashMap<>();
-      parentheses.put('(', ')');
-      parentheses.put('{', '}');
-      parentheses.put('[', ']');
-  
-      try {
-          for (char oneChar : fromString.toCharArray()) {
-              if (parentheses.containsKey(oneChar)) {
-                  try {
-                      stack.push(oneChar);
-                      count++;
-                  } catch (Exception e) {
-                      throw new ParenthesesException("Stack failure", line, columnNumber, ParenthesesException.STACK_FAILURE);
-                  }
-              } else if (parentheses.containsValue(oneChar)) {
-                  if (stack.isEmpty()) {
-                      throw new ParenthesesException("Too many closing parentheses", line, columnNumber, ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
-                  }
-                  char lastOpen = stack.pop();
-                  if (parentheses.get(lastOpen) != oneChar) {
-                      throw new ParenthesesException("Mismatched parentheses", line, columnNumber, ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
-                  }
-                  count++;
-              }
-              if (oneChar == '\n') {
-                  line++;
-                  columnNumber = 1;
-              }
-              else{
+        int count = 0;
+        int line = 1;
+        int columnNumber = 1;
+        for (char oneChar : fromString.toCharArray()){
+            switch (oneChar) {
+                case '(', '[', '{':
+                    count++;
+                    try{
+                        stack.push(oneChar);
+                    }
+                    catch(Exception e){
+                        throw new ParenthesesException("Stack failure", line, columnNumber, ParenthesesException.STACK_FAILURE);
+                    }
+                    break;
+                case ')', ']', '}':
+                    if (stack.isEmpty()) {
+                        throw new ParenthesesException("Too many closing parentheses", line, columnNumber, ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
+                    }
+                    char lastOpen = stack.pop();
+                    if ((lastOpen != '(' && oneChar == ')') || (lastOpen != '[' && oneChar == ']') || (lastOpen != '{' && oneChar == '}')) {
+                        throw new ParenthesesException("Mismatched parentheses", line, columnNumber, ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
+                    }
+                    count++;
+                default:
+                    break;
+            }
+            if (oneChar == '\n') {
+                line++;
+                columnNumber = 1;
+            }
+            else{
                 columnNumber++;
-              }
-          }
-          if (!stack.isEmpty()) {
-              throw new ParenthesesException("Too many opening parentheses", line, columnNumber, ParenthesesException.TOO_MANY_OPENING_PARENTHESES);
-          }
-      } catch (ParenthesesException e) {
-          throw e;
-      } catch (Exception e) {
-          throw new ParenthesesException("Stack failure", line, columnNumber, ParenthesesException.STACK_FAILURE);
-      }
-  
-      return count;
-   }
+            }
+        }
+        if (!stack.isEmpty()) {
+            throw new ParenthesesException("Too many opening parentheses", line, columnNumber, ParenthesesException.TOO_MANY_OPENING_PARENTHESES);
+        }
+        return count;
+    }
 }

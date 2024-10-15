@@ -185,6 +185,37 @@ Tehtävää tehdessäni pääsin palauttamaan mieleen puolitushaun ja comparator
 
 ## 04-TASK
 
+Pinorakenteen toteutus oli helppo hetikun ymmärsi miten sen taustalla toimiva interface toimii, ja sen totetuksessa ei ollut mitään ongelmaa. Samoin ParenthesisChecker oli helppo tehdä, mutta päädyin kokeilemaan siihen ainakin 4:jää eri toteutusta ja debuggamaan turhaan 3 tuntia koska en ollut huomannut että tehtävän testit olivat väärin forkatussa repossa.
+
+Tulipahan siis niinsanottua toistokoulutusta tämän toteutuksen tekemiseen, ja nyt ainakin ymmärrän täysin sen toiminnan sen myötä että olen toteuttanut sen neljällä eri tavalla?
+
+Tehtävää oli enimmäkseen hauska tehdä ja se oli hyvin opettavainen, vaikka pinorakenne on joskus käyty ammattikoulussa läpi niin sen kertaaminen ei ollut kyllä pahitteeksi.
+
+Analysoidaan pinototeutustani aikakompleksisuusvaatimusten pohjalta:
+
+- `capacity()`: O(1).
+  Palauttaa muuttujan, ei kutsu toisia funktioita = toteutuu.
+- `push()`: O(1) paitsi kun joudutaan reallokoimaan: O(n).
+  Palauttaa muuttujan = toteutuu; kun reallokoidaan käydään n pituinen for loop läpi taulukkoa kopioitaessa = toteutuu.
+- `pop()`: O(1).
+  Palauttaa muuttujan, ei kutsu toisia funktioita = toteutuu.
+- `peek()`: O(1).
+  Palauttaa muuttujan, ei kutsu toisia funktioita = toteutuu.
+- `size():` O(1).
+  Palauttaa muuttujan, ei kutsu toisia funktioita = toteutuu.
+- `isEmpty():` O(1).
+  Palauttaa muuttujan, ei kutsu toisia funktioita = toteutuu.
+- `clear()`: O(1).
+  Raporttia tehdessäni huomasinkin clear funktioni olevan luokkaa O(N), sillä korvasin siinä for loopilla jokaisen alkion nullilla. Nyt aikakompleksisuus myös O(1):
+
+```java
+	array = new Object[DEFAULT_STACK_SIZE];
+	tail = 0;
+```
+
+- `toString()`: O(n).
+  Käydään n pituinen for loop läpi taulukkoa tulostaessa = toteutuu.
+
 ## 05-TASK
 
 ## 06-TASK
