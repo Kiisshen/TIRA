@@ -208,7 +208,7 @@ public class Algorithms {
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator, FastSortAlgorithm algorithm) {
       switch (algorithm) {
          case QUICKSORT:
-            // TODO: Call your quicksort algorithm here.
+            quickSort(array, fromIndex, toIndex, comparator);
             break;
          case HEAPSORT:
             // TODO: IF implementing heapsort, call your algorithm here.
@@ -219,6 +219,34 @@ public class Algorithms {
          default:
             break;
       }
+   }
+
+   public static <E> void quickSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
+      if (fromIndex >= toIndex) {
+         return;
+      }
+      int p = quickSortPartition(array, fromIndex, toIndex, comparator);
+      quickSort(array, fromIndex, p, comparator);
+      quickSort(array, p + 1, toIndex, comparator);
+   }
+
+   public static <E> int quickSortPartition(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
+      E pivot = array[toIndex - 1];
+      int i = fromIndex;
+
+      for (int j = fromIndex; j < toIndex - 1; j++) {
+         if (comparator.compare(array[j], pivot) <= 0) {
+            E temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
+            i++;
+         }
+      }
+
+      E temp = array[toIndex - 1];
+      array[toIndex - 1] = array[i];
+      array[i] = temp;
+      return i;
    }
 
 } // End of class Algorithms

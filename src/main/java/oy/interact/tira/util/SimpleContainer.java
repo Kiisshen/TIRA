@@ -215,7 +215,7 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 		// You may want to check if the array has any elements before calling sort.
 		// Also note that the array here has elements only between 0..<count!
 		if(array != null && array.length > 0){
-			Algorithms.insertionSort(array, 0, count);
+			Algorithms.fastSort(array, 0, count, Comparator.naturalOrder());
 			sorted = true;
 		}
 	}
@@ -226,7 +226,7 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 		// You may want to check if the array has any elements before calling sort.
 		// Also note that the array here has elements only between 0..<count!
 		if(array.length > 0){
-			Algorithms.insertionSort(array, 0, count, usingComparator);
+			Algorithms.fastSort(array, 0, count, usingComparator);
 			sorted = true;
 		}
 	}

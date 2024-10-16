@@ -250,6 +250,11 @@ Analysoidaan jonototeutuksia aikakompleksisuuden näkökulmasta:
 
 ## 06-TASK
 
+InsertionSort:
+![alt text](image-2.png)
+QuickSort:
+![alt text](image-3.png)
+
 ## 07-TASK
 
 ## 08-TASK
